@@ -1,30 +1,46 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Michail
- * Date: 21.02.14
- * Time: 14:28
+/*
+ * Задача:
+ * Дан массив размерностью N случайных числе от 0 до 100.
+ * Найти минимальный элемент массива.
  */
 
-// Функция сортироки пузырьком
-function min_integer($ranmod_array)
+// Генерирует массив случайных чисел
+function generate_random_array($length)
 {
-    for ($i = 0 ;$i <=1000; $i++  )
+    $result = array();
+
+    for ($i = 0; $i < $length - 1; $i++)
     {
-        for ($min_int = $i+1; $min_int < count($ranmod_array); $min_int++);
+        array_push($result, rand(0, 100));
+    }
+
+    return $result;
+}
+
+// Функция сортироки пузырьком
+function bubble_sort(&$random_arr)
+{
+    for ($i = 0; $i < count($random_arr); $i++)
+    {
+        for ($j = $i + 1; $j < count($random_arr); $j++)
         {
-            if ($ranmod_array[$i] > $ranmod_array[$i]+1)
+            if ($random_arr[$i] > $random_arr[$j])
             {
-                $c = $ranmod_array[$i+1];
-                $ranmod_array[$i+1] = $ranmod_array[$i];
-                $ranmod_array[$i] = $c;
+                $c = $random_arr[$i];
+                $random_arr[$i] = $random_arr[$j];
+                $random_arr[$j] = $c;
             }
         }
     }
 }
 
-$random_arr = range( 0, 1000);
-min_integer($random_arr);
+$random_arr = generate_random_array(10000);
+echo "Original array:";
+print_r($random_arr);
 
+bubble_sort($random_arr);
+echo "Sorted array:";
 print_r($random_arr); // выведем наш отсортированный массив
+echo "MIN:";
 echo $random_arr[0]; // выведем минимальное значение в массиве
