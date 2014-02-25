@@ -18,13 +18,18 @@
             if ($d = $a + $b + $c);
             echo "$d";
         }
+
         public static  function  subtraction ($a, $b, $c)
         {
             if ($d = $a - $b);
             echo "$d";
         }
 
-    }
-$int = new Integers;
-$int-> subtraction("10" , "20", "30");
+        public static  function  arr ($a, $b, $c)
+        {
+        $result = array($a, $b, $c);
+        return (int)$result;
+        }
+$array = new Integers;
+$array-> arr("10" , "20", "30");
 
