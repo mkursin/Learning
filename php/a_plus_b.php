@@ -11,19 +11,15 @@
  *      В единственную строку выходного файла OUTPUT.TXT нужно вывести одно целое число — сумму чисел А и В.
  */
 
-    $first_file = fopen('input1.txt', 'r'); // oткрываем файл с атрибутом "только чтение"
-    $string = fread($first_file, 100); // читаем данные с файла  указателем чтения до 100 символов
-    fclose($first_file);//закрываем файл
+    include 'file_methods.php';
 
-    $string = explode(' ', $string); // разбиваем прочитанную в файле строку  на 2 части (до и после пробела)
-    $A = (int) $string[0]; // значение до пробела присвоим переменной $A
-    $B = (int) $string[1]; // значение до пробела присвоим переменной $B
-    $C = $A + $B;          // сумма сложения двух чисел из файла
+    $str = File_Method::read_from_file('', '1.txt');
+    $string = explode(' ', $str);
 
-    $last_file = fopen('output1.txt', 'w'); // откроем файл с атрибоутом "для записи"
-    fwrite($last_file, $C); // запишем в него полученный результат
-    fclose($last_file);     // закроем файл
+    $A = (int) $string[0];
+    $B = (int) $string[1];
+    $C = $A + $B;
 
-    $last_file = fopen('output1.txt', 'r'); // проверка, выполнилось ли сложение заданных чисел
-    $string = fread($last_file, 100);
-    print_r($string);
+    File_Method::writte_to_file('1.txt', $C);
+
+    print_r(File_Method::read_from_file('output/', '1.txt'));
