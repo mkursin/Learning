@@ -10,14 +10,14 @@
 
     class Geometry_Circle
     {
-        var $radius;
-        var $length;
-        var $diametr;
-        var $area;
+        var $radius  = 10;
+        var $length  = 31.4 ;
+        var $diametrs = 20;
+        var $area = 314;
 
         function circle ($radius)
         {
-           if ($diametr = $radius*2);
+           if ($diametrs = $radius*2);
             {
                 if ($length = 3.14*$radius);
                 {
@@ -25,10 +25,32 @@
                 }
             }
             {
-            echo "радиус круга равен $radius, его диаметр равен $diametr, a длина его окружности равна $length,  площадь $area";
+            echo "радиус круга равен $radius, его диаметр равен $diametrs, a длина его окружности равна $length,  площадь $area";
             }
         }
     }
 
-$new_circle = new Geometry_Circle;
-$new_circle ->circle ("100");
+    $new_circle = new Geometry_Circle;
+    $new_circle ->circle ("10");
+
+    class Geometry_Rectangle
+    {
+        var $width  = 10;
+        var $length  = 20 ;
+        var $area = 200;
+
+    function rectange ($area, $length)
+
+    {
+        $width = $area / $length;
+        echo "длина равна $width";
+    }
+}
+    $new_rectangle = new Geometry_Rectangle;
+    $new_rectangle ->rectange("10", "50");
+
+    class Geometry_Square extends Geometry_Rectangle
+    {
+        function rectange ($area, $length)
+        echo "длина равна: $width";
+    }

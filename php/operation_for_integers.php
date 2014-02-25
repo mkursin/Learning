@@ -13,13 +13,18 @@
         public $b = "";
         public $c = "";
 
-        public static function operation ($a, $b, $c)
+        public static function addition ($a, $b, $c)
         {
             if ($d = $a + $b + $c);
+            echo "$d";
+        }
+        public static  function  subtraction ($a, $b, $c)
+        {
+            if ($d = $a - $b);
             echo "$d";
         }
 
     }
 $int = new Integers;
-$int-> operation("10" , "20", "");
+$int-> subtraction("10" , "20", "30");
 
