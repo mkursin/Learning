@@ -12,6 +12,7 @@ function get_translate_directions()
 	$response = Requests::get($url, $headers);
 	$langs = json_decode($response->body);
 	return $langs->dirs;
+	
 }
 
 function translate($str, $lng)
@@ -22,19 +23,27 @@ function translate($str, $lng)
 	$body = json_decode($response->body);
 	return $body->text[0];
 }
-
-echo "Enter the flow direction en-ru:";
+	/*
+	 * Пока данный код не буду удалять, может пригодиться для доработки
+	 */
+	/*echo "Введите направление перевода (например:ru-en). Внимание! По умолчанию будет заданно направленеи перевода  ru-en:";
+$original = fgets(STDIN);
+$lng  = fgets(STDIN);
+$lng = "ru-en";
 if ($lng  = fgets(STDIN) == true)
-{
-	$lng = "en-ru";
-}
-/*if ($original  = fgets(STDIN) == true)
-{
-	echo "Введите перводимое слово";
-}*/
-$original = 'Hello World!';
-$result = translate($original, $lng);
+	{
+		$lng = "ru-en";
+	}
+*/
 
-echo "source string: $original \n";
-echo "translated string: ";
+echo "Русско-английский переводчик \n Введите  перводимую фразу  или предложение и нажмите Enter:";
+	if ($original  = fgets(STDIN))
+/*if ($original  = fgets(STDIN) == true)
+	{
+	}
+$original = 'Привет, как дела?';*/
+$lng = "ru-en";
+$result = translate($original, $lng);
+echo "Переводимая строка: $original \n";
+echo "Переведенная строка: ";
 echo $result;
