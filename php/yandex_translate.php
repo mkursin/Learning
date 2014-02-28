@@ -30,9 +30,9 @@ if ($lng  = fgets(STDIN) == true)
 }
 /*if ($original  = fgets(STDIN) == true)
 {
-	echo "Введите перводимое слово";
+	echo "Р’РІРµРґРёС‚Рµ РїРµСЂРІРѕРґРёРјРѕРµ СЃР»РѕРІРѕ";
 }*/
-$original = 'Hello';
+$original = 'Hello World!';
 $result = translate($original, $lng);
 
 echo "source string: $original \n";
