@@ -2,17 +2,35 @@
 
 require 'vendor/autoload.php';
 
-function translate()
+define("YA_TRANSLATE_URL", "https://translate.yandex.net/api/v1.5");
+define("YA_TRANSLATE_KEY", "trnsl.1.1.20140227T084741Z.d3de9e0d146bce27.4fec6ec140e62e9b799eaf1c28b30e735fac59dd&ui=ru");
+
+function get_translate_directions()
 {
-    $url = 'http://translate.yandex.net/api/v1.5/tr.json/getLangs?key=trnsl.1.1.20140226T080900Z.a8833b71f06295e0.b40bb146ba46d5e079843deb4b23766eb006d472';
-    //$url = 'http://translate.google.ru/#en/ru';
-    //$string = file_get_contents($url);
-    $str = json_encode($string);
-    $request  =  Requests :: get ( ' $url, $str' );
-    json_decode($str);
-	return $str;
+	$url = YA_TRANSLATE_URL . "/tr.json/getLangs?key=" . YA_TRANSLATE_KEY . "&ui=ru";
+	$headers = array('Accept' => 'application/json');
+	$response = Requests::get($url, $headers);
+	$langs = json_decode($response->body);
+	return $langs->dirs;
 }
 
-$zapros = "Привет";
-// translate($zapros);
-print_r(translate($zapros));
+function translate($str, $lng)
+{
+	$url = YA_TRANSLATE_URL . "/tr.json/translate?key=" . YA_TRANSLATE_KEY . "&ui=ru&text=" . $str . "&lang=" . $lng;
+	$headers = array('Accept' => 'application/json');
+	$response = Requests::get($url, $headers);
+	$body = json_decode($response->body);
+	return $body->text[0];
+}
+
+echo "Enter the flow direction en-ru:";
+if ($lng  = fgets(STDIN) == true)
+{
+	$lng = "en-ru";
+}
+$original = 'Привет';
+$result = translate($original, $lng);
+
+echo "source string: $original \n";
+echo "translated string: ";
+echo $result;

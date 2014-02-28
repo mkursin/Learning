@@ -10,10 +10,10 @@
 
     class Geometry_Circle
     {
-        var $radius  = 10;
-        var $length  = 31.4 ;
-        var $diametrs = 20;
-        var $area = 314;
+        $radius  = 10;
+        $length  = 31.4;
+        $diametrs = 20;
+        $area = 314;
 
         function circle ($radius)
         {

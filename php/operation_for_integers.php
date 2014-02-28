@@ -9,27 +9,27 @@
  */
     class Integers
     {
-        public $a = "";
-        public $b = "";
-        public $c = "";
 
         public static function addition ($a, $b, $c)
         {
             if ($d = $a + $b + $c);
             echo "$d";
+			return $d;
         }
 
         public static  function  subtraction ($a, $b, $c)
         {
-            if ($d = $a - $b);
+            if ($d = $a - $b +$c);
             echo "$d";
+			return $d;
         }
 
-        public static  function  arr ($a, $b, $c)
+        public static  function  arr ()
         {
         $result = array($a, $b, $c);
         return (int)$result;
         }
-$array = new Integers;
-$array-> arr("10" , "20", "30");
+	}
 
+print_r ( Integers::subtraction(1,2,3));
+print_r ( Integers::addition(1,2,3));
