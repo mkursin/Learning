@@ -8,49 +8,46 @@
  * Построим систему классов для описания плоских геометрических фигур: круга, квадрата, прямоугольника. Предусмотрим методы для изменения размеров.
  */
 
-    class Geometry_Circle
+   class Geometry_Circle
     {
-        $radius  = 10;
-        $length  = 31.4;
-        $diametrs = 20;
-        $area = 314;
 
-        function circle ($radius)
-        {
-           if ($diametrs = $radius*2);
-            {
-                if ($length = 3.14*$radius);
-                {
-                    if ($area = 3.14*$radius*$radius);
-                }
-            }
-            {
-            echo "радиус круга равен $radius, его диаметр равен $diametrs, a длина его окружности равна $length,  площадь $area";
-            }
+        function circle()
+        {   $radius = 10;
+	        $area =3.14 * $radius *  $radius;
+	       return $area;
         }
     }
 
-    $new_circle = new Geometry_Circle;
-    $new_circle ->circle ("10");
+	$result = new Geometry_Circle();
+	echo $result ->circle();
 
-    class Geometry_Rectangle
+   class Geometry_Rectangle
     {
-        var $width  = 10;
-        var $length  = 20 ;
-        var $area = 200;
+		public  $width = 60;
+	    public $length = 100;
 
-    function rectange ($area, $length)
+        function rectange ()
+        {
+	        $area = $this->width * $this->length;
+	        return $area;
+        }
+	}
 
-    {
-        $width = $area / $length;
-        echo "длина равна $width";
-    }
-}
     $new_rectangle = new Geometry_Rectangle;
-    $new_rectangle ->rectange("10", "50");
+    $new_rectangle ->rectange ();
+	echo $new_rectangle ->rectange ();
+
+
 
     class Geometry_Square extends Geometry_Rectangle
     {
-        function rectange ($area, $length)
-        echo "длина равна: $width";
+	    public  $length = 60;
+        function square ()
+        {
+	        $ar = $this->width * $this->length;
+	        return $ar;
+        }
     }
+	$new_square = new Geometry_Square();
+	$new_square->square();
+	echo $new_square->square();
