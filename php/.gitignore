@@ -44,4 +44,4 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 .composer/
-./vendor
+.vendor/
