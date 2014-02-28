@@ -28,7 +28,11 @@ if ($lng  = fgets(STDIN) == true)
 {
 	$lng = "en-ru";
 }
-$original = 'РџСЂРёРІРµС‚';
+/*if ($original  = fgets(STDIN) == true)
+{
+	echo "Введите перводимое слово";
+}*/
+$original = 'Привет';
 $result = translate($original, $lng);
 
 echo "source string: $original \n";

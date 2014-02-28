@@ -32,4 +32,4 @@
 	}
 
 print_r ( Integers::subtraction(1,2,3));
-print_r ( Integers::addition(1,2,3));
+print_r ( Integers::subtraction(1,3,4));
