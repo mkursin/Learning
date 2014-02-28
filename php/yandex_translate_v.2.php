@@ -1,4 +1,14 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: 112
+ * Date: 28.02.14
+ * Time: 16:55
+ */
+/*
+ * Решил доделать переводчик, на выбор направления , ну и соответственно текста.
+ */
+
 
 require 'vendor/autoload.php';
 
@@ -23,26 +33,12 @@ function translate($str, $lng)
 	$body = json_decode($response->body);
 	return $body->text[0];
 }
-	/*
-	 * Пока данный код не буду удалять, может пригодиться для доработки
-	 */
-	/*echo "Введите направление перевода (например:ru-en). Внимание! По умолчанию будет заданно направленеи перевода  ru-en:";
-$original = fgets(STDIN);
-$lng  = fgets(STDIN);
-$lng = "ru-en";
-if ($lng  = fgets(STDIN) == true)
-	{
-		$lng = "ru-en";
-	}
-*/
+
 
 echo "Русско-английский переводчик \n Введите  перводимую фразу  или предложение и нажмите Enter:";
-	if ($original  = fgets(STDIN))
-/*if ($original  = fgets(STDIN) == true)
-	{
-	}
-$original = 'Привет, как дела?';*/
-$lng = "ru-en";
+if ($original  = fgets(STDIN))
+
+	$lng = "ru-en";
 $result = translate($original, $lng);
 echo "Переводимая строка: $original \n";
 echo "Переведенная строка: ";
