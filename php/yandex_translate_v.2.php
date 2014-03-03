@@ -20,12 +20,13 @@ function get_translate_directions()
 	$url = YA_TRANSLATE_URL . "/tr.json/getLangs?key=" . YA_TRANSLATE_KEY . "&ui=ru";
 	$headers = array('Accept' => 'application/json');
 	$response = Requests::get($url, $headers);
-	$langs = json_decode($response->body);
-	return $langs->dirs;
+	//$langs = json_decode($response->body);
+	//return $langs->dirs;
+
 
 }
 
-function translate($str, $lng)
+/*function translate($str, $lng)
 {
 	$url = YA_TRANSLATE_URL . "/tr.json/translate?key=" . YA_TRANSLATE_KEY . "&ui=ru&text=" . $str . "&lang=" . $lng;
 	$headers = array('Accept' => 'application/json');
@@ -42,4 +43,4 @@ if ($original  = fgets(STDIN))
 $result = translate($original, $lng);
 echo "Переводимая строка: $original \n";
 echo "Переведенная строка: ";
-echo $result;
+echo $result;*/
