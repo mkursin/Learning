@@ -3,25 +3,23 @@
 <head>
     <meta charset="utf-8">
     <title>Комментарии гостевой книги</title>
-    <!--<script type="text/javascript" src="./jquery-1.11.0.min.js"></script>-->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="jPages-master/js/jPages.js"></script>
-    <link rel="stylesheet" href="jPages-master/css/jPages.css">
-
     <script>
-        function getComments(page) {
+        function getComments(page, limit) {
             if (page == undefined) {
                 page = 1;
             }
-            $.get("get_comments.php", { page: page }, function (response) {
+            if (limit == undefined) {
+                limit = 5;
+            }
+            $.get("get_comments.php", { page: page, limit: limit }, function (response) {
                 var data = $.parseJSON(response);
 
                 $('.ajax_row').remove();
-                $.each(data.items, function (index, item) {
 
+                $.each(data.items, function (index, item) {
                     var tr = $('<tr class="ajax_row">').append(
-                            $('<td>').text(index),
+                            $('<td>').text(item.ID),
                             $('<td>').text(item.name),
                             $('<td>').text(item.email),
                             $('<td>').text(item.review)
@@ -29,43 +27,48 @@
                     $(tr).appendTo($('#comments'));
                 });
 
+                $('#paginator_tr').remove();
+
+                if(data.count_pages > 1) {
+                    $('#paginator table').append('<tr id="paginator_tr"></tr>');
+
+                    for (var i = 1; i <= data.count_pages; i++){
+                        var td = "<td><a class='page_num' href='#'>" + i + "</a></td>";
+                        $('#paginator_tr').append(td);
+
+                        if (data.page == i) {
+                            $('.page_num').last().css('font-weight', 'bold');
+                            $('.page_num').last().css('color', 'red');
+                        }
+                    }
+
+                    $('.page_num').click(function() {
+                        getComments($(this).text(), 10);
+                    })
+                }
             });
         }
 
         $(document).ready(function () {
-            getComments(1);
-
-            $(".jp-item").click(function (element) {
-                element.preventDefault();//позволяет предотвратить выполнение стандартного действия
-                getComments($(this).attr('id'));
-            });
-
+            getComments(2, 10);
         });
 
     </script>
 
 </head>
 <body>
-<h1>Комментарии гостевой книги</h1>
-<table id="comments" border="1" cellpadding="4" cellspacing="1"
-       style="background-color: #ff771f; padding: 5px; color:black">
-    <tr>
-        <th>#</th>
-        <th>Имя</th>
-        <th>email</th>
-        <th>Отзыв</th>
-    <tr>
-</table>
-
-<div class="holder">
-    <a class="jp-previous jp-disabled">← previous</a>
-    <a id="1" class="jp-item jp-current">1</a>
-    <a id="2" class="jp-item">2</a>
-    <a id="3" class="jp-item">3</a>
-    <a id="4" class="jp-item">4</a>
-    <a id="5" class="jp-item">5</a>
-    <a id = "next" class="jp-item jp-next">next →</a>
-</div>
-
+    <h1>Комментарии гостевой книги</h1>
+    <table id="comments" border="1" cellpadding="4" cellspacing="1"
+           style="background-color: #ff771f; padding: 5px; color:black">
+        <tr>
+            <th>#</th>
+            <th>Имя</th>
+            <th>email</th>
+            <th>Отзыв</th>
+        <tr>
+    </table>
+    <div id="paginator">
+        <table style="background-color: lightyellow;"></table>
+    </div>
 </body>
 </html>
