@@ -2,24 +2,70 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Комментарии</title>
-    <script type="text/javascript" src="./jquery-1.11.0.min.js"></script>
+    <title>Комментарии гостевой книги</title>
+    <!--<script type="text/javascript" src="./jquery-1.11.0.min.js"></script>-->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="jPages-master/js/jPages.js"></script>
+    <link rel="stylesheet" href="jPages-master/css/jPages.css">
+
+    <script>
+        function getComments(page) {
+            if (page == undefined) {
+                page = 1;
+            }
+            $.get("get_comments.php", { page: page }, function (response) {
+                var data = $.parseJSON(response);
+
+                $('.ajax_row').remove();
+                $.each(data.items, function (index, item) {
+
+                    var tr = $('<tr class="ajax_row">').append(
+                            $('<td>').text(index),
+                            $('<td>').text(item.name),
+                            $('<td>').text(item.email),
+                            $('<td>').text(item.review)
+                    );
+                    $(tr).appendTo($('#comments'));
+                });
+
+            });
+        }
+
+        $(document).ready(function () {
+            getComments(1);
+
+            $(".jp-item").click(function (element) {
+                element.preventDefault();//позволяет предотвратить выполнение стандартного действия
+                getComments($(this).attr('id'));
+            });
+
+        });
+
+    </script>
+
 </head>
 <body>
-<table id="guest">
+<h1>Комментарии гостевой книги</h1>
+<table id="comments" border="1" cellpadding="4" cellspacing="1"
+       style="background-color: #ff771f; padding: 5px; color:black">
     <tr>
-        <td>Имя</td>
-        <td>email</td>
-        <td>Отзыв</td>
+        <th>#</th>
+        <th>Имя</th>
+        <th>email</th>
+        <th>Отзыв</th>
     <tr>
 </table>
-<script>
-    $(document).ready(function () {
-        $.getJSON("get_comments.php", function (data) {
-            $('#guest tr:last').append('<tr><td>' + data.name + ' ' + '</td><td>' + data.email + ' ' + '</td><td>' + data.review + '</td><tr>');
-        });
-    });
 
-</script>
+<div class="holder">
+    <a class="jp-previous jp-disabled">← previous</a>
+    <a id="1" class="jp-item jp-current">1</a>
+    <a id="2" class="jp-item">2</a>
+    <a id="3" class="jp-item">3</a>
+    <a id="4" class="jp-item">4</a>
+    <a id="5" class="jp-item">5</a>
+    <a id = "next" class="jp-item jp-next">next →</a>
+</div>
+
 </body>
 </html>
